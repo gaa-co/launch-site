@@ -1,16 +1,18 @@
 baseurl = "/"
-languageCode = "en-us"
+# updated from template languageCode = "en-us"
 languageLang = "en"
-title = "My new Victor-Hugo site"
+# Updated fron template title = "My new Victor-Hugo site"
 
 # RSS, categories and tags disabled for an easy start
 # See configuration options for more details:
 # https://gohugo.io/getting-started/configuration/#toml-configuration
 disableKinds = ["RSS", "taxonomy", "taxonomyTerm"]
 
+
+title = "GAA initial setup"
 theme = "hugo-universal-theme"
-#themesDir = "../.."
-#languageCode = "en-us"
+themesDir = "../.."
+languageCode = "en-us"
 # Site language. Available translations in the theme's `/i18n` directory.
 defaultContentLanguage = "en"
 # Enable comments by entering your Disqus shortname
@@ -97,7 +99,7 @@ paginate = 10
     # - you're done. Happy mailing!
     #
     # Enable the contact form by entering your Formspree.io email
-    email = "ernesto+forspree@globalappawards.com"
+    email = "your@email.com"
 
     about_us = "<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>"
     copyright = "Copyright (c) 2015 - 2016, YourCompany; all rights reserved."
@@ -132,8 +134,8 @@ paginate = 10
 
 # Enable and disable widgets for the right sidebar
 [params.widgets]
-    categories = false
-    tags = false
+    categories = true
+    tags = true
     search = true
 
 [params.carousel]
@@ -165,7 +167,7 @@ paginate = 10
     link_text = "Check other homepages"
 
 [params.clients]
-    enable = false
+    enable = true
     # All clients are defined in their own files. You can find example items
     # at 'exampleSite/data/clients'.
     # For more informtion take a look at the README.
