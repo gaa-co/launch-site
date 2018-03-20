@@ -159,7 +159,7 @@ gulp.task('img', function () {
       compressionLevel: 6,
       // Strip all metadata
       withMetadata: false,
-      silent: true,      // Don't spam the console
+      silent: false,      // Don't spam the console
       withoutEnlargement: true,
       skipOnEnlargement: false, // that option copy original file with/without renaming
       errorOnEnlargement: false,
@@ -169,6 +169,7 @@ gulp.task('img', function () {
     ) //closing cache function
    ) // Closing pipe
     .pipe(gulp.dest('./dist/img'))
+    .pipe(gulp.dest('./site/static/img'))
     .pipe(gulp.dest('./site/public/img'));
 });
 
