@@ -5,10 +5,10 @@
   "repository": "netlify/victor-hugo",
   "main": "index.js",
   "scripts": {
-    "hugo": "gulp hugo",
-    "build": "gulp build",
+    "hugo": "VIPS_WARNING='false' gulp hugo",
+    "build": "VIPS_WARNING='false' gulp build",
     "build-preview": "gulp build-preview",
-    "start": "gulp server",
+    "start": "VIPS_WARNING='false' gulp server",
     "lint": "eslint src"
   },
   "author": "",
@@ -39,8 +39,17 @@
     "imports-loader": "^0.7.1",
     "postcss-cssnext": "^3.1.0",
     "postcss-import": "^11.0.0",
+    "sharp": "^0.20.1",
     "url-loader": "^0.6.2",
+    "vanilla-lazyload": "^8.6.0",
     "webpack": "3.10.0",
     "whatwg-fetch": "^2.0.3"
+  },
+  "devDependencies": {
+    "gulp-cache": "^1.0.2",
+    "gulp-cached": "^1.1.1",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-responsive": "^2.9.0",
+    "imagemin-mozjpeg": "^7.0.0"
   }
 }
