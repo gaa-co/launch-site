@@ -38,6 +38,17 @@ Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac tu
 * Aliquam tincidunt mauris eu risus.
 * Vestibulum auctor dapibus neque.
 
+## 6. TESTING Img Responsive shortcode
+{{< img src="/img/banners/banner-4" type="jpg" alt="image alt"  >}}
+
+
+##8 using Figure and LazyLoad
+<picture>
+    <source media="(min-width: 1024px)" data-srcset="/img/banners/banner-4.jpg" />
+    <source media="(min-width: 500px)" data-srcset="/img/banners/banner-4.jpg" />
+    <img alt="Stivaletti" data-src="/img/banners/banner-4.jpg">
+</picture>
+
 ---
 
 > In case you haven't found the answer for your question please feel free to contact us, our customer support will be happy to help you.

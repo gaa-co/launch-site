@@ -1,0 +1,58 @@
+<!--
+#####################
+# Responsive Images #
+#####################
+
+## README:
+
+Allows browser to load a different image based on screen width and device pixel density. This allows for a smaller file size and better load performance when users are on a lower capacity device. Uses images generated in the gulp build script. Some browsers don't support <picture> and will load the fallback <img>; see browser support: http://caniuse.com/#feat=picture
+
+### Useage
+
+Leave off file extention in the src then pass it to a type parameter and wrap everything in double curly braces:
+
+  < img src="/img/example" type="jpg" alt="Example" >
+
+Optional: Use the 'caption' parameter to add an image caption:
+
+  < img src="/img/example" type="jpg" alt="Example" caption="This is a nice." >
+
+ TO-DO:  ADD BIGGER IMAGES  "1600" "1366" TO GULFILE FOR RESIZING
+-->
+{{ .Scratch.Add "img_sizes" (slice "1920" "1024" "640") }}
+{{ .Scratch.Set "img_src" (.Get "src") }}
+{{ $img_src := $.Scratch.Get "img_src" }}
+{{ $img_src }}
+{{ .Scratch.Set "img_type" (.Get "type") }}
+{{ $img_type := .Scratch.Get "img_type" }}
+<p>img:type: {{ $img_type }} </p>
+{{ printf "/public%s.webp" $img_src  }}
+
+<div class="picture">
+  {{ if .Get "caption"}}
+  <figure>
+  {{ end }}
+    <picture>
+      <!-- Responsive webp images and Responsive img_type images for img_sizes -->
+      {{ range .Scratch.Get "img_sizes" }}
+      {{ printf "%s-%s.webp" $img_src .  }}<P>
+        {{ if (fileExists  ( printf "/public%s-%s.webp" $img_src . )  ) }}
+            <source type="image/webp" srcset="{{ $img_src }}-{{ . }}.webp  1x, {{ $img_src }}-{{ . }}@2x.webp 2x" media="(min-width: {{ . }}px)">
+        {{- end }}
+
+        {{ if (fileExists "/public/img/banner.jpg" ) -}}
+            <source srcset="{{ $img_src }}-{{ . }}.{{ $img_type }}  1x, {{ $img_src }}-{{ . }}@2x.{{ $img_type }} 2x" media="(min-width: {{ . }}px)">
+        {{- end }}
+
+      {{ end }}
+      <!-- Fallback -->
+      <img
+        src="{{ .Get "src" }}.{{ .Get "type" }}"
+        srcset="{{ .Get "src" }}@2x.{{ .Get "type" }} 2x"
+        alt="{{ .Get "alt" }}"{{ if .Get "caption"}} class="img-fluid figure-img"{{ end }}>
+    </picture>
+  {{ if .Get "caption"}}
+    <figcaption>{{ .Get "caption" }}</figcaption>
+  </figure>
+  {{ end }}
+</div>
