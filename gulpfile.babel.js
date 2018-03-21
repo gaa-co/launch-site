@@ -42,7 +42,8 @@ gulp.task('greet', function () {
 
 gulp.task('img', function () {
   return gulp.src('./src/img/**/*.{jpg,png}')
-    .pipe(cache(responsive({
+    .pipe( //cache(
+      responsive({
       '**/*.jpg': [{
         // Resize all JPG images to 2x  wide
         width: '200%',
@@ -137,7 +138,19 @@ gulp.task('img', function () {
           suffix: '-1920@2x',
           extname: '.webp',
         }
-      }
+      },
+      {
+        // Convert all JPG images to webp
+        width: '100%',
+        rename: {
+          extname: '.webp',
+        }
+      },
+      {
+        // Compress all images to save up space
+        width: '100%',
+
+      },
 
     ],
       '**/*.png': {
@@ -166,12 +179,17 @@ gulp.task('img', function () {
       errorOnUnusedConfig: false
 
     }) // closing responsive function
-    ) //closing cache function
+    // ) //closing cache function
    ) // Closing pipe
-    .pipe(gulp.dest('./dist/img'))
-    .pipe(gulp.dest('./site/static/img'))
-    .pipe(gulp.dest('./site/public/img'));
+    .pipe(gulp.dest('./dist/img/'))
+//    .pipe(gulp.dest('./site/static/img'))
+//    .pipe(gulp.dest('./site/public/img'))
+    ;
 });
+
+gulp.task('clear', () =>
+    cache.clearAll()
+);
 
 // Compile CSS with PostCSS
 gulp.task("css", () => (

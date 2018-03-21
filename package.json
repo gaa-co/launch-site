@@ -22,7 +22,6 @@
     "babel-plugin-transform-object-assign": "^6.8.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-env": "^1.6.1",
-    "babel-register": "^6.11.6",
     "browser-sync": "^2.23.6",
     "css-loader": "^0.28.9",
     "eslint": "^4.17.0",
@@ -46,6 +45,7 @@
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
+    "babel-register": "^6.26.0",
     "gulp-cache": "^1.0.2",
     "gulp-cached": "^1.1.1",
     "gulp-imagemin": "^4.1.0",

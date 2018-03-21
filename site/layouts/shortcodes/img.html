@@ -11,7 +11,7 @@ Allows browser to load a different image based on screen width and device pixel 
 
 Leave off file extention in the src then pass it to a type parameter and wrap everything in double curly braces:
 
-  < img src="/img/example" type="jpg" alt="Example" >
+  < img src="/img/example" type="jpg" alt="Example" class="class_name" >
 
 Optional: Use the 'caption' parameter to add an image caption:
 
@@ -26,25 +26,22 @@ Optional: Use the 'caption' parameter to add an image caption:
 {{ .Scratch.Set "img_type" (.Get "type") }}
 {{ $img_type := .Scratch.Get "img_type" }}
 <p>img:type: {{ $img_type }} </p>
-{{ printf "/public%s.webp" $img_src  }}
-
+{{ .Scratch.Set "webp_file" ( printf "%s.webp" (strings.TrimLeft "/" $img_src))  }}
+{{ printf "%s.webp" $img_src  }}
+<p> webp file:
+{{ .Scratch.Get "webp_file" }}
+</P>
 <div class="picture">
   {{ if .Get "caption"}}
   <figure>
   {{ end }}
     <picture>
       <!-- Responsive webp images and Responsive img_type images for img_sizes -->
-      {{ range .Scratch.Get "img_sizes" }}
-      {{ printf "%s-%s.webp" $img_src .  }}<P>
-        {{ if (fileExists  ( printf "/public%s-%s.webp" $img_src . )  ) }}
-            <source type="image/webp" srcset="{{ $img_src }}-{{ . }}.webp  1x, {{ $img_src }}-{{ . }}@2x.webp 2x" media="(min-width: {{ . }}px)">
-        {{- end }}
-
-        {{ if (fileExists "/public/img/banner.jpg" ) -}}
-            <source srcset="{{ $img_src }}-{{ . }}.{{ $img_type }}  1x, {{ $img_src }}-{{ . }}@2x.{{ $img_type }} 2x" media="(min-width: {{ . }}px)">
-        {{- end }}
-
-      {{ end }}
+     {{ range .Scratch.Get "img_sizes" }}
+        <source type="image/webp" srcset="{{ $img_src }}-{{ . }}.webp  1x, {{ $img_src }}-{{ . }}@2x.webp 2x" media="(min-width: {{ . }}px)">
+        <source srcset="{{ $img_src }}-{{ . }}.{{ $img_type }}  1x, {{ $img_src }}-{{ . }}@2x.{{ $img_type }} 2x" media="(min-width: {{ . }}px)">
+     {{ end }}
+      <source type="image/webp" srcset="{{ $img_src }}.webp  1x, {{ $img_src }}@2x.webp 2x" >
       <!-- Fallback -->
       <img
         src="{{ .Get "src" }}.{{ .Get "type" }}"
